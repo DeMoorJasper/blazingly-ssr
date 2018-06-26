@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "bootstrap": "lerna bootstrap",
     "cli": "node ./src/cli",
     "test-build": "yarn cli build ./test-deploy",
     "test-serve": "yarn cli serve ./test-deploy"
@@ -23,8 +24,6 @@
     "parcel-bundler": "^1.8.1",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
-    "request": "^2.87.0",
-    "tar": "^4.4.4",
     "terser": "^3.7.6"
   },
   "devDependencies": {
