@@ -4,16 +4,10 @@ const program = require('commander');
 const pkg = require('../package.json');
 const path = require('path');
 
-const deploy = require('./commands/deploy');
 const build = require('./commands/build');
 const serve = require('./commands/serve');
 
 program.version(pkg.version, '-v, --version');
-
-program
-  .command('deploy <dir>')
-  .option('--no-cache', 'Disable the cache')
-  .action(deploy);
 
 program
   .command('build <dir>')

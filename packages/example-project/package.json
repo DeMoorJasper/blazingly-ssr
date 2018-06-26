@@ -1,0 +1,14 @@
+{
+  "name": "@blazingly/example-project",
+  "license": "MIT",
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "start": "echo not supported yet",
+    "build": "blazingly build ./src",
+    "serve": "blazingly serve ./src"
+  },
+  "devDependencies": {
+    "node-sass": "^4.9.0",
+    "@blazingly/cli": "^0.0.1"
+  }
+}
