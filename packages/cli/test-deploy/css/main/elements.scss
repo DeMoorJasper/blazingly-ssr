@@ -1,0 +1,48 @@
+@import '../variables/fonts.scss';
+@import '../variables/fontsizes.scss';
+@import '../variables/colors.scss';
+
+h1, h2, h3, h4, h5 {  
+  font-family: $header-fonts;
+  margin-bottom: 2rem;
+}
+
+h1 {
+  font-size: $font-size-header;
+  text-align: center;
+  color: $black;
+}
+
+h2 {
+  font-size: $font-size-big;
+  color: $black;
+}
+
+h3 {
+  font-size: $font-size-medium;
+}
+
+p {
+  line-height: 2rem;
+}
+
+a {
+  color: inherit;
+  text-decoration: underline;
+
+  &:hover {
+    color: $blue;
+  }
+
+  &.noUnderline {
+    text-decoration: none;
+  }
+}
+
+.centerElement {
+  margin: 0 auto;
+}
+
+.centerText {
+  text-align: center;
+}

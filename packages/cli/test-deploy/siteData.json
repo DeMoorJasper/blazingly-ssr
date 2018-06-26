@@ -1,0 +1,27 @@
+{
+  "hostname": "localhost",
+  "header": {
+    "language": "en",
+    "meta": [
+      {
+        "charset": "UTF-8"
+      },
+      {
+        "http-equiv": "X-UA-Compatible",
+        "content": "ie=edge"
+      },
+      {
+        "name": "viewport",
+        "content": "width=device-width, initial-scale=1"
+      },
+      {
+        "name": "description",
+        "content": "Welcome to Wonkey Bars, the specialty shop for chocolate bars"
+      },
+      {
+        "name": "theme-color",
+        "content": "#db5945"
+      }
+    ]
+  }
+}

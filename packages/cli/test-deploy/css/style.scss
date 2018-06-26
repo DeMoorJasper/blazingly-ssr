@@ -1,0 +1,16 @@
+/* VARIABLES */
+@import './variables/colors.scss';
+@import './variables/fonts.scss';
+@import './variables/fontsizes.scss';
+
+body {
+  font-size: $font-size-small;
+  color: $darkgrey;
+  background: $grey;
+  font-family: $content-fonts;
+}
+
+/* REFERENCE SHEET */
+@import './main/containers.scss';
+@import './main/elements.scss';
+@import './main/forms.scss';
