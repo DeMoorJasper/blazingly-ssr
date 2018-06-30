@@ -154,12 +154,12 @@ class Page {
         html: content,
         base: this.options.outDir,
         folder: this.options.outDir,
-        dest: 'critical.css',
         minify: true,
         ignore: ['@font-face', /url\(/]
       });
 
       content = content.replace('/* BLAZINGLY INLINE CRITICAL CSS */', criticalCss);
+      await fs.writeFile(path.join(this.outDir, 'critical.css'), criticalCss);
     }
     
     await fs.writeFile(path.join(this.outDir, 'index.html'), content);

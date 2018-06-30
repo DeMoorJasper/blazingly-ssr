@@ -1,7 +1,10 @@
 function moduleBootstrap(code, options) {
   return `
     const React = sandboxRequire('react');
-    const renderToString = sandboxRequire('react-dom/server').renderToString;
+    ${options.stream 
+      ? "const renderToNodeStream = sandboxRequire('react-dom/server').renderToNodeStream;" 
+      : "const renderToString = sandboxRequire('react-dom/server').renderToString;"
+    }
     ${code}
     render = function(props) {
       if (Page.default) {
