@@ -1,10 +1,8 @@
 // Node modules
-const { renderToString } = require('react-dom/server');
-const fs = require('fs-extra');
 const path = require('path');
 
 // Local requires
-const renderSandbox = require('./renderSandbox');
+const RenderSandbox = require('@blazingly/render-sandbox');
 
 // Used for critical css selection and snapshot rendering for dev server
 async function snapshot({ page, cssBundles, jsBundles, isProduction }) {
@@ -33,7 +31,7 @@ async function snapshot({ page, cssBundles, jsBundles, isProduction }) {
   for (let css of cssBundles) {
     styles += `<link rel="stylesheet" type="text/css" href="/${path.relative(page.options.outDir, css)}">`;
   }
-  
+
   let scripts = '';
   for (let js of jsBundles) {
     scripts += `<script src="/${path.relative(page.options.outDir, js)}" type="text/javascript"></script>`;
@@ -67,7 +65,12 @@ async function snapshot({ page, cssBundles, jsBundles, isProduction }) {
     </body>
     </html>`;
 
-  return header + renderSandbox(page.getRenderScript().content).render(properties) + footer;
+  let renderSandbox = new RenderSandbox({
+    noopConsole: true,
+    stream: false
+  });
+
+  return header + renderSandbox.preRender(page.getRenderScript().content).render(properties) + footer;
 }
 
 module.exports = snapshot;

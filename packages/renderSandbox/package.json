@@ -1,9 +1,11 @@
 {
   "name": "@blazingly/render-sandbox",
   "version": "0.0.1",
-  "main": "./src/main.js",
+  "main": "./src/RenderSandbox.js",
   "license": "MIT",
   "dependencies": {
-    
+    "jsdom": "^11.11.0",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1"
   }
 }
