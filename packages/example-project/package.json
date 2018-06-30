@@ -10,5 +10,9 @@
   "devDependencies": {
     "node-sass": "^4.9.0",
     "@blazingly/cli": "^0.0.1"
+  },
+  "dependencies": {
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1"
   }
 }
