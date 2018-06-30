@@ -5,9 +5,6 @@
   "bin": {
     "blazingly": "./src/cli.js"
   },
-  "scripts": {
-    "bootstrap": "lerna bootstrap"
-  },
   "dependencies": {
     "chalk": "^2.4.1",
     "commander": "^2.15.1",

@@ -3,9 +3,6 @@
   "version": "0.0.1",
   "main": "./src/main.js",
   "license": "MIT",
-  "scripts": {
-    "bootstrap": "lerna bootstrap"
-  },
   "dependencies": {
     
   }

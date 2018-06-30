@@ -1,7 +1,8 @@
 {
 	"scripts": {
 		"publish": "lerna publish --ignore @blazingly/example-project",
-		"updated": "lerna updated"
+		"updated": "lerna updated",
+		"bootstrap": "lerna bootstrap"
 	},
 	"devDependencies": {
 		"lerna": "^2.11.0"
