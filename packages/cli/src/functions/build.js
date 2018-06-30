@@ -17,12 +17,12 @@ async function postProcessBundles({ project, parcelBundle, requestHandlerBundle 
     await project.updateRequestHandlerBundles(requestHandlerBundle);
     await project.postProcessParcelBundle(parcelBundle);
     await project.snapshotPages();
-  } catch(e) {
+  } catch (e) {
     logger.stopSpinner();
 
     logger.error(`An error occured while post-processing the bundles.`);
     logger.error(e);
-    
+
     let prompt = inquirer.createPromptModule();
     let promptResponse = await prompt([
       {
@@ -52,7 +52,7 @@ async function build(inputDir, buildOptions = { production: false }) {
 
   try {
     await fs.remove(outDir);
-  } catch(e) {
+  } catch (e) {
     // Do nothing...
   }
 
@@ -83,12 +83,6 @@ async function build(inputDir, buildOptions = { production: false }) {
     autoinstall: false
   });
 
-  let parcelBundle = await bundler.bundle();
-
-  logger.persistSpinner(logger.emoji.success, 'Bundled render-code!', 'green');
-
-  logger.updateSpinner('Bundling request handlers...');
-
   let requestHandlers = (await project.getAllRequestHandlers())
     .map(requestHandler => requestHandler.entry);
 
@@ -108,31 +102,33 @@ async function build(inputDir, buildOptions = { production: false }) {
     contentHash: buildOptions.production,
     autoinstall: false
   });
-  let requestHandlerBundle = await requestHandlerBundler.bundle();
 
-  logger.persistSpinner(logger.emoji.success, 'Request handlers bundled!', 'green');
+  let parcelBundle, requestHandlerBundle;
 
-  await postProcessBundles({ project, parcelBundle, requestHandlerBundle });
-
-  if (buildOptions.watch) {
-    const rebuildHandler = async () => {
+  const postProcess = async () => {
+    if (requestHandlerBundle && parcelBundle) {
       await postProcessBundles({ project, parcelBundle, requestHandlerBundle });
-      if (buildOptions.rebuildTrigger && typeof buildOptions.rebuildTrigger === 'function') {
-        buildOptions.rebuildTrigger();
+      if (buildOptions.buildTrigger && typeof buildOptions.buildTrigger === 'function') {
+        buildOptions.buildTrigger();
       }
     }
-
-    bundler.on('bundled', bundle => {
-      parcelBundle = bundle;
-      rebuildHandler();
-    });
-
-    requestHandlerBundler.on('bundled', bundle => {
-      requestHandlerBundle = bundle;
-      rebuildHandler();
-    });
   }
-  
+
+  bundler.on('bundled', bundle => {
+    logger.persistSpinner(logger.emoji.success, 'Bundled render-code!', 'green');
+    parcelBundle = bundle;
+    postProcess();
+  });
+
+  requestHandlerBundler.on('bundled', bundle => {
+    logger.persistSpinner(logger.emoji.success, 'Request handlers bundled!', 'green');
+    requestHandlerBundle = bundle;
+    postProcess();
+  });
+
+  await bundler.bundle();
+  await requestHandlerBundler.bundle();
+
   return outDir;
 }
 

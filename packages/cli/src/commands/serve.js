@@ -26,7 +26,7 @@ async function serve(dir, options = {}) {
     cache: options.cache,
     sourceMaps: options.sourceMaps,
     watch: true,
-    rebuildTrigger: () => {
+    buildTrigger: () => {
       // Rebuild listener
     }
   });
