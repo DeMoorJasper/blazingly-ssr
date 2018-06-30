@@ -1,7 +1,6 @@
 const path = require('path');
 
 // Local requires
-const cliOptions = require('../options');
 const build = require('../functions/build');
 const logger = require('../logger');
 

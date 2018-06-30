@@ -1,0 +1,14 @@
+{
+  "name": "@blazingly/server",
+  "version": "0.0.1",
+  "main": "./src/main.js",
+  "license": "MIT",
+  "scripts": {
+    "bootstrap": "lerna bootstrap"
+  },
+  "dependencies": {
+    "express": "^4.16.3",
+    "fs-extra": "^6.0.1",
+    "mime": "^2.3.1"
+  }
+}

@@ -1,10 +1,9 @@
 const path = require('path');
 
 // Local requires
-const cliOptions = require('../options');
 const build = require('../functions/build');
 const logger = require('../logger');
-const Server = require('../functions/Server');
+const Server = require('@blazingly/server').Server;
 
 function cleanOptions(dir, options) {
   return {
@@ -34,8 +33,8 @@ async function serve(dir, options = {}) {
   logger.persistSpinner(logger.emoji.success, `Build finished, watching for changes...`, 'green');
 
   logger.updateSpinner('Starting server...');
-  let server = new Server({ outDir });
-  await server.start(options.port);
+  let server = new Server({ outDir, port: options.port });
+  await server.start();
   logger.persistSpinner(logger.emoji.success, `Server listening on port ${options.port}.`, 'green');
 }
 

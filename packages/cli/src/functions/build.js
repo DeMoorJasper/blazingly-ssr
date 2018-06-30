@@ -5,7 +5,6 @@ const fs = require('fs-extra');
 const inquirer = require('inquirer');
 
 // Local requires
-const cliOptions = require('../options');
 const Project = require('../project/Project');
 const logger = require('../logger');
 const getRootDir = require('../utils/getRootDir');
@@ -47,8 +46,8 @@ async function build(inputDir, buildOptions = { production: false }) {
   logger.updateSpinner('Bundling render-code...');
 
   // Gather files that need bundling
-  let outDir = buildOptions.outDir || path.join(cliOptions.tempFolder, 'dist');
-  let cacheDir = buildOptions.cacheDir || path.join(cliOptions.tempFolder, '.parcel-cache');
+  let outDir = buildOptions.outDir || path.join(process.cwd(), '.blazingly/dist');
+  let cacheDir = buildOptions.cacheDir || path.join(process.cwd(), '.blazingly/.parcel-cache');
 
   try {
     await fs.remove(outDir);
