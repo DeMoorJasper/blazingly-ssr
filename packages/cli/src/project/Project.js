@@ -132,6 +132,25 @@ class Project {
     await fs.writeFile(path.join(this.options.outDir, 'redirects.json'), JSON.stringify(mappings));
   }
 
+  async writeBundlePathsJSON() {
+    let bundlePaths = {};
+    for (let bundleSet of this.bundles.values()) {
+      for (let bundle of bundleSet)  {
+        if (bundle.isBrowserBundle) {
+          if (!bundlePaths[bundle.type]) {
+            bundlePaths[bundle.type] = [];
+          }
+          bundlePaths[bundle.type].push('/' + path.relative(this.options.outDir, bundle.bundlePath));
+        }
+      }
+    }
+    
+    await fs.writeFile(
+      path.join(this.options.outDir, 'bundlePaths.json'),
+      JSON.stringify(bundlePaths)
+    );
+  }
+
   async postProcessParcelBundle(parcelBundle) {
     let promises = [];
 
@@ -150,6 +169,7 @@ class Project {
 
     await Promise.all(promises);
     await this.serviceWorker.writeServiceWorker();
+    await this.writeBundlePathsJSON();
 
     await this.writeRedirects();
   }

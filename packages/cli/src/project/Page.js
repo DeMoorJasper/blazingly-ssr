@@ -104,6 +104,25 @@ class Page {
     await Promise.all(promises);
   }
 
+  async writeBundlePathsJSON() {
+    let bundlePaths = {};
+    for (let bundleSet of this.bundles.values()) {
+      for (let bundle of bundleSet)  {
+        if (bundle.isBrowserBundle) {
+          if (!bundlePaths[bundle.type]) {
+            bundlePaths[bundle.type] = [];
+          }
+          bundlePaths[bundle.type].push('/' + path.relative(path.join(this.options.outDir, this.name), bundle.bundlePath));
+        }
+      }
+    }
+    
+    await fs.writeFile(
+      path.join(this.options.outDir, this.name, 'bundlePaths.json'),
+      JSON.stringify(bundlePaths)
+    );
+  }
+
   async postProcess(parcelBundle) {
     await fs.writeFile(
       path.join(this.options.outDir, this.name, 'pageData.json'),
@@ -111,6 +130,7 @@ class Page {
     );
 
     await this._postProcessBundles(parcelBundle);
+    await this.writeBundlePathsJSON();
 
     return this;
   }

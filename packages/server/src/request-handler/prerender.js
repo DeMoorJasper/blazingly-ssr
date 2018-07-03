@@ -10,6 +10,9 @@ let renderSandbox = new RenderSandbox({
   stream: true
 });
 
+let rootBundlePaths;
+let pageBundlePaths = {};
+
 function getPageName(url) {
   if (url === '/' || url === '') {
     return '.root';
@@ -20,6 +23,22 @@ function getPageName(url) {
 async function preRender(req, res, parsedUrl, options) {
   let pageName = getPageName(parsedUrl.pathname);
   let pageFolder = path.join(options.outDir, pageName);
+
+  if (!rootBundlePaths) {
+    try {
+      rootBundlePaths = JSON.parse(await fs.readFile(path.join(options.outDir, 'bundlePaths.json'), 'utf-8'));
+    } catch(e) {
+      rootBundlePaths = {};
+    }
+  }
+
+  if (!pageBundlePaths[pageName]) {
+    try {
+      pageBundlePaths[pageName] = JSON.parse(await fs.readFile(path.join(pageFolder, 'bundlePaths.json'), 'utf-8'));
+    } catch(e) {
+      pageBundlePaths[pageName] = {};
+    }
+  }
 
   let pageData;
   try {
@@ -37,8 +56,23 @@ async function preRender(req, res, parsedUrl, options) {
   }
   
   pageData.criticalScripts = [];
+
   pageData.nonCriticalScripts = [];
+  if (rootBundlePaths['js']) {
+    pageData.nonCriticalScripts = pageData.nonCriticalScripts.concat(rootBundlePaths['js']);
+  }
+  if (pageBundlePaths[pageName]['js']) {
+    pageData.nonCriticalScripts = pageData.nonCriticalScripts.concat(pageBundlePaths[pageName]['js']);
+  }
+
   pageData.nonCriticalStyles = [];
+  if (rootBundlePaths['css']) {
+    pageData.nonCriticalStyles = pageData.nonCriticalStyles.concat(rootBundlePaths['css']);
+  }
+  if (pageBundlePaths[pageName]['css']) {
+    pageData.nonCriticalStyles = pageData.nonCriticalStyles.concat(pageBundlePaths[pageName]['css']);
+  }
+
   pageData.properties = pageData.properties || {};
 
   res.status(200);
