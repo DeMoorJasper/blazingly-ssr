@@ -32,7 +32,7 @@ async function serve(dir, options = {}) {
 
       if (!server) {
         logger.updateSpinner('Starting server...');
-        let server = new Server({ outDir, port: options.port });
+        server = new Server({ outDir, port: options.port });
         await server.start();
         logger.persistSpinner(logger.emoji.success, `Server listening on port ${options.port}.`, 'green');
       }
