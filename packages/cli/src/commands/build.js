@@ -21,10 +21,11 @@ async function deploy(dir, options = {}) {
     production: true,
     outDir,
     cache: options.cache,
-    sourceMaps: options.sourceMaps
+    sourceMaps: options.sourceMaps,
+    buildTrigger: () => {
+      logger.persistSpinner(logger.emoji.success, `Build saved in ${bundledPath}`, 'green');
+    }
   });
-
-  logger.persistSpinner(logger.emoji.success, `Build saved in ${bundledPath}`, 'green');
 }
 
 module.exports = deploy;

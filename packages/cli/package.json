@@ -14,7 +14,7 @@
     "inquirer": "^5.2.0",
     "lodash": "^4.17.10",
     "ora": "^2.1.0",
-    "parcel-bundler": "^1.9.3",
+    "parcel-bundler": "^1.9.4",
     "terser": "^3.7.6",
     "@blazingly/server": "^0.0.1",
     "@blazingly/render-sandbox": "^0.0.1"

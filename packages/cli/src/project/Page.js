@@ -82,9 +82,14 @@ class Page {
 
   async getRequestHandler() {
     // Gather request handlers
-    let requestHandlerPath = path.join(this.rootDir, 'handleRequest.js');
-    if (await fs.pathExists(requestHandlerPath)) {
-      this._requestHandler = new RequestHandler(requestHandlerPath, this);
+    if (!this._requestHandler) {
+      let requestHandlerPossibilities = await glob(path.join(this.rootDir, 'handleRequest.*'), {
+        nodir: true
+      });
+  
+      if (requestHandlerPossibilities.length > 0) {
+        this._requestHandler = new RequestHandler(requestHandlerPossibilities[0], this);
+      }
     }
     return this._requestHandler;
   }

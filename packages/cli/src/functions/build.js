@@ -119,10 +119,18 @@ async function build(inputDir, buildOptions = { production: false }) {
     postProcess();
   });
 
+  bundler.on('buildError', error => {
+    logger.error(error);
+  });
+
   requestHandlerBundler.on('bundled', bundle => {
     logger.persistSpinner(logger.emoji.success, 'Request handlers bundled!', 'green');
     requestHandlerBundle = bundle;
     postProcess();
+  });
+
+  requestHandlerBundler.on('buildError', error => {
+    logger.error(error);
   });
 
   await bundler.bundle();

@@ -26,11 +26,9 @@ async function serve(dir, options = {}) {
     sourceMaps: options.sourceMaps,
     watch: true,
     buildTrigger: () => {
-      // Rebuild listener
+      logger.persistSpinner(logger.emoji.success, `Build finished, watching for changes...`, 'green');
     }
   });
-
-  logger.persistSpinner(logger.emoji.success, `Build finished, watching for changes...`, 'green');
 
   logger.updateSpinner('Starting server...');
   let server = new Server({ outDir, port: options.port });
