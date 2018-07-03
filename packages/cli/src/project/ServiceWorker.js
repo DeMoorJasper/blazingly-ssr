@@ -26,7 +26,7 @@ class ServiceWorker {
 
   async writeServiceWorker() {
     this.path = path.join(this.options.outDir, `sw-${md5(await this.createServiceWorker())}.js`);
-    await fs.writeFile(this.path, this.content);
+    await fs.writeFile(this.path, await this.createServiceWorker());
   }
 }
 

@@ -19,21 +19,25 @@ async function serve(dir, options = {}) {
   options = cleanOptions(dir, options);
   
   let outDir = path.join(process.cwd(), options.outDir || '.blazingly/serve');
-  let bundledPath = await build(options.inputDir, {
+
+  let server;
+  await build(options.inputDir, {
     production: false,
     outDir,
     cache: options.cache,
     sourceMaps: options.sourceMaps,
     watch: true,
-    buildTrigger: () => {
+    buildTrigger: async () => {
       logger.persistSpinner(logger.emoji.success, `Build finished, watching for changes...`, 'green');
+
+      if (!server) {
+        logger.updateSpinner('Starting server...');
+        let server = new Server({ outDir, port: options.port });
+        await server.start();
+        logger.persistSpinner(logger.emoji.success, `Server listening on port ${options.port}.`, 'green');
+      }
     }
   });
-
-  logger.updateSpinner('Starting server...');
-  let server = new Server({ outDir, port: options.port });
-  await server.start();
-  logger.persistSpinner(logger.emoji.success, `Server listening on port ${options.port}.`, 'green');
 }
 
 module.exports = serve;

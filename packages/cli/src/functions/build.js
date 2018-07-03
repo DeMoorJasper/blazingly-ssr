@@ -98,7 +98,7 @@ async function build(inputDir, buildOptions = { production: false }) {
     sourceMaps: buildOptions.sourceMaps || buildOptions.production ? false : true,
     production: buildOptions.production,
     minify: buildOptions.production,
-    contentHash: buildOptions.production,
+    contentHash: false,
     autoinstall: false
   });
 
@@ -108,7 +108,7 @@ async function build(inputDir, buildOptions = { production: false }) {
     if (requestHandlerBundle && parcelBundle) {
       await postProcessBundles({ project, parcelBundle, requestHandlerBundle });
       if (buildOptions.buildTrigger && typeof buildOptions.buildTrigger === 'function') {
-        buildOptions.buildTrigger();
+        await buildOptions.buildTrigger();
       }
     }
   }

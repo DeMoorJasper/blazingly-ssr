@@ -124,6 +124,14 @@ class Project {
     }
   }
 
+  async writeRedirects() {
+    let mappings = {};
+
+    mappings['/sw.js'] = '/' + path.basename(this.serviceWorker.path);
+
+    await fs.writeFile(path.join(this.options.outDir, 'redirects.json'), JSON.stringify(mappings));
+  }
+
   async postProcessParcelBundle(parcelBundle) {
     let promises = [];
 
@@ -142,6 +150,8 @@ class Project {
 
     await Promise.all(promises);
     await this.serviceWorker.writeServiceWorker();
+
+    await this.writeRedirects();
   }
 
   async snapshotPages() {

@@ -9,7 +9,7 @@ const getAssetId = require('../parcel/getAssetId');
 const md5 = require('../utils/md5');
 
 class Bundle {
-  constructor({ type, entry, parent, options = {}, isBrowserBundle = true, content = '', deleteOriginal = true, isVirtual = false }) {
+  constructor({ type, entry, parent, options = {}, isBrowserBundle = true, content = '', deleteOriginal = true }) {
     this.type = type;
     this.entry = entry;
     this.options = options;
@@ -49,8 +49,7 @@ class Bundle {
         parent: this.parent,
         options: this.options,
         isBrowserBundle: true,
-        deleteOriginal: false,
-        isVirtual: true
+        deleteOriginal: false
       });
       await browserBundle.postProcess(parcelBundle);
       this.parent.addBundle(this.type, browserBundle);
