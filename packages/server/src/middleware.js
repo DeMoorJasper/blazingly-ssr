@@ -7,6 +7,11 @@ const fs = require('fs');
 const preRender = require('./request-handler/prerender');
 const rawFile = require('./request-handler/rawFile');
 
+const SPECIAL_PAGES = {
+  '/offline': 'You appear to be offline, and unfortunately this page has not been cached :(',
+  '/404': 'Page not found.'
+};
+
 let redirects = {};
 
 function registerMiddleware(options) {
@@ -33,9 +38,14 @@ function registerMiddleware(options) {
       console.log('200 OK - ', req.url, 'TOOK:', (Date.now() - startTime), 'ms');
     } catch (e) {
       try {
+        let specialPage = SPECIAL_PAGES[parsedUrl.pathname];
+        if (specialPage) {
+          return res.send(specialPage);
+        }
+
         res.status(404);
         res.set('Content-Type', 'text/plain');
-        res.send('File not found.');
+        res.send(SPECIAL_PAGES['/404']);
 
         console.error('404 NOT FOUND - ', req.url, 'TOOK:', (Date.now() - startTime), 'ms');
       } catch (e) {
