@@ -11,7 +11,7 @@ function cleanOptions(dir, options) {
     outDir: options.outDir,
     cache: options.cache,
     sourceMaps: options.sourceMaps === false ? false : true,
-    port: 1234
+    port: options.port || 1234
   };
 }
 
