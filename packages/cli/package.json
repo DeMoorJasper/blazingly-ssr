@@ -1,13 +1,13 @@
 {
   "name": "@blazingly/cli",
-  "version": "0.0.3",
+  "version": "0.0.1",
   "license": "MIT",
   "bin": {
     "blazingly": "./src/cli.js"
   },
   "dependencies": {
-    "@blazingly/render-sandbox": "^0.0.3",
-    "@blazingly/server": "^0.0.3",
+    "@blazingly/render-sandbox": "^0.0.1",
+    "@blazingly/server": "^0.0.1",
     "chalk": "^2.4.1",
     "commander": "^2.15.1",
     "critical": "^1.3.2",
