@@ -73,7 +73,16 @@ async function preRender(req, res, parsedUrl, options) {
     pageData.nonCriticalStyles = pageData.nonCriticalStyles.concat(pageBundlePaths[pageName]['css']);
   }
 
-  pageData.properties = pageData.properties || {};
+  let requestHandlerProps;
+  try {
+    const requestHandler = require(path.join(pageFolder, 'handleRequest.js'));
+    requestHandlerProps = await requestHandler(req);
+  } catch(e) {
+    // Do nothing for now
+    // in the future only filter out FS errors...
+  }
+  
+  pageData.properties = Object.assign(requestHandlerProps || {}, pageData.properties || {});
 
   res.status(200);
   res.set('Content-Type', 'text/html; charset=utf-8');
@@ -130,13 +139,21 @@ function writeHeader(res, pageData) {
   }
   deferredStyles += '</noscript>';
 
+  let propertiesJSONString;
+  try {
+    JSON.stringify(pageData.properties);
+  } catch(e) {
+    console.error(`Could not stringify page properties`);
+    console.error(e);
+  }
+
   res.write(`
     <html lang="${pageData.header ? pageData.header.language || 'en' : 'en'}">
     <head>
       <title>${pageData.header ? pageData.header.title : ''}</title>
       ${metaData}
       <link rel="manifest" href="/assets/manifest/${pageData.page}/manifest.json">
-      <script>window.__APP_INITIAL_STATE__ = ${JSON.stringify(pageData.properties)}</script>
+      <script>window.__APP_INITIAL_STATE__ = ${propertiesJSONString}</script>
       <style>
         ${pageData.criticalCSS}
       </style>

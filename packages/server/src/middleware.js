@@ -37,6 +37,7 @@ function registerMiddleware(options) {
 
       console.log('200 OK - ', req.url, 'TOOK:', (Date.now() - startTime), 'ms');
     } catch (e) {
+      console.error(e);
       try {
         let specialPage = SPECIAL_PAGES[parsedUrl.pathname];
         if (specialPage) {
