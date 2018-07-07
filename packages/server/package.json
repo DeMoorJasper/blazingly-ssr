@@ -1,6 +1,6 @@
 {
   "name": "@blazingly/server",
-  "version": "0.1.1",
+  "version": "0.0.1",
   "main": "./src/main.js",
   "license": "MIT",
   "dependencies": {
@@ -8,5 +8,8 @@
     "express": "^4.16.3",
     "fs-extra": "^6.0.1",
     "mime": "^2.3.1"
+  },
+  "scripts": {
+    "publish-script": "npm publish --access=public"
   }
 }

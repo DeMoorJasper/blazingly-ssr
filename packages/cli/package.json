@@ -5,6 +5,9 @@
   "bin": {
     "blazingly": "./src/cli.js"
   },
+  "scripts": {
+    "publish-script": "npm publish --access=public"
+  },
   "dependencies": {
     "@blazingly/render-sandbox": "^0.1.1",
     "@blazingly/server": "^0.1.1",

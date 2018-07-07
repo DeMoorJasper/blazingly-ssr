@@ -1,6 +1,5 @@
 {
 	"scripts": {
-		"publish": "lerna publish --ignore @blazingly/example-project",
 		"updated": "lerna updated",
 		"bootstrap": "lerna bootstrap"
 	},
