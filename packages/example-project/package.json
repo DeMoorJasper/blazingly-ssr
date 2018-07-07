@@ -7,12 +7,12 @@
     "serve": "blazingly serve ./src"
   },
   "devDependencies": {
-    "@blazingly/cli": "^0.0.1",
+    "@blazingly/cli": "^0.0.2",
     "node-sass": "^4.9.0"
   },
   "dependencies": {
     "react": "^16.4.1",
     "react-dom": "^16.4.1"
   },
-  "version": "0.0.1"
+  "version": "0.0.2"
 }
