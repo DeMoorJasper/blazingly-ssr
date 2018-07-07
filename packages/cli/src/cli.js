@@ -24,7 +24,7 @@ program
   .action(serve);
 
 program
-  .command('prod-serve <dir>')
+  .command('prod-serve [dir]')
   .option('--port', 'Set a custom port for the server')
   .action(productionServe);
 
