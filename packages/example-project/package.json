@@ -2,7 +2,7 @@
   "name": "@blazingly/example-project",
   "license": "MIT",
   "scripts": {
-    "start": "echo not supported yet",
+    "start": "blazingly prod-serve ./src",
     "build": "blazingly build ./src",
     "serve": "blazingly serve ./src"
   },

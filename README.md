@@ -42,7 +42,7 @@ Building for production
 blazingly build <folder containing all the pages {in the above case ./root}>
 ```
 
-Starting the production server
+Starting the production server (run blazingly build first!)
 ```bash
 blazingly prod-serve <the output folder of the build command>
 ```
