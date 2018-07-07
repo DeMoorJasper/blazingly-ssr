@@ -1,4 +1,4 @@
-# Blazingly
+# Blazingly (Proof Of Concept/Experiment)
 
 Blazingly™ is a SSR cli tool using parcel in the background for creating web projects that load insanely fast without having to worry about anything as a developer, thanks to the power of parcel and the many tools already included within this CLI.
 
