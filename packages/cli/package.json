@@ -6,6 +6,8 @@
     "blazingly": "./src/cli.js"
   },
   "dependencies": {
+    "@blazingly/render-sandbox": "^0.0.1",
+    "@blazingly/server": "^0.0.1",
     "chalk": "^2.4.1",
     "commander": "^2.15.1",
     "critical": "^1.3.2",
@@ -15,8 +17,6 @@
     "lodash": "^4.17.10",
     "ora": "^2.1.0",
     "parcel-bundler": "^1.9.4",
-    "terser": "^3.7.6",
-    "@blazingly/server": "^0.0.1",
-    "@blazingly/render-sandbox": "^0.0.1"
+    "terser": "^3.7.6"
   }
 }
