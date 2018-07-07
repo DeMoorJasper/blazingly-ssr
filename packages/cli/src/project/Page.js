@@ -112,7 +112,7 @@ class Page {
           if (!bundlePaths[bundle.type]) {
             bundlePaths[bundle.type] = [];
           }
-          bundlePaths[bundle.type].push('/' + path.relative(path.join(this.options.outDir, this.name), bundle.bundlePath));
+          bundlePaths[bundle.type].push('/' + path.relative(this.options.outDir, bundle.bundlePath));
         }
       }
     }
