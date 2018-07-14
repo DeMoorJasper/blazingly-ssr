@@ -9,7 +9,7 @@ const getAssetId = require('../parcel/getAssetId');
 const md5 = require('../utils/md5');
 
 class Bundle {
-  constructor({ type, entry, parent, options = {}, isBrowserBundle = true, content = '', deleteOriginal = true }) {
+  constructor({ type, entry, parent, options = {}, isBrowserBundle = true, content = '' }) {
     this.type = type;
     this.entry = entry;
     this.options = options;
@@ -19,11 +19,14 @@ class Bundle {
     this.assetId = '';
     this.contentHash = '';
     this.content = content;
-    this.deleteOriginal = deleteOriginal;
+    this.blazingBundlePath = '';
+    this.extension = '';
   }
 
-  async postProcess(parcelBundle) {
+  async gatherData(parcelBundle) {
     this.bundlePath = findAssetBundle(this.entry, parcelBundle);
+    this.blazingBundlePath = path.normalize(this.bundlePath.replace('.parcel-dist', ''));
+    this.extension = path.extname(this.bundlePath);
     this.assetId = getAssetId(this.entry, parcelBundle);
     try {
       this.content = await fs.readFile(this.bundlePath);
@@ -32,6 +35,10 @@ class Bundle {
         throw new Error('Cannot read bundle');
       }
     }
+  }
+
+  async postProcess(parcelBundle) {
+    await this.gatherData(parcelBundle);
 
     // This could prob be cleaner, but I guess it works...
     if (this.type === 'js' && !this.isBrowserBundle) {
@@ -40,7 +47,7 @@ class Bundle {
         return parcelRequire(${this.assetId});
       })();`;
 
-      await fs.writeFile(this.bundlePath, this.content);
+      await fs.writeFile(this.blazingBundlePath, this.content);
 
       let browserBundle = new Bundle({
         type: this.type,
@@ -48,8 +55,7 @@ class Bundle {
         content: browserBootstrap(this.content),
         parent: this.parent,
         options: this.options,
-        isBrowserBundle: true,
-        deleteOriginal: false
+        isBrowserBundle: true
       });
       await browserBundle.postProcess(parcelBundle);
       this.parent.addBundle(this.type, browserBundle);
@@ -59,18 +65,11 @@ class Bundle {
 
     if (this.isBrowserBundle) {
       let hashedBundlePath = path.join(
-        path.dirname(this.bundlePath),
-        `${this.contentHash}${path.extname(this.bundlePath)}`
+        path.dirname(this.blazingBundlePath),
+        `${this.contentHash}${this.extension}`
       );
       await fs.writeFile(hashedBundlePath, this.content);
-      if (this.deleteOriginal) {
-        try {
-          await fs.unlink(this.bundlePath);
-        } catch(e) {
-          // File doesn't exist, just ignore and continue...
-        }
-      }
-      this.bundlePath = hashedBundlePath;
+      this.blazingBundlePath = hashedBundlePath;
     }
 
     return this;

@@ -112,7 +112,7 @@ class Page {
           if (!bundlePaths[bundle.type]) {
             bundlePaths[bundle.type] = [];
           }
-          bundlePaths[bundle.type].push('/' + path.relative(this.options.outDir, bundle.bundlePath));
+          bundlePaths[bundle.type].push('/' + path.relative(this.options.outDir, bundle.blazingBundlePath));
         }
       }
     }
@@ -148,7 +148,7 @@ class Page {
   getBundlePathsByType(type) {
     let projectCSS = this._getBundlesFromBundleMap(this.project.bundles).filter(bundle => bundle.type === type);
     let pageCSS = this._getBundlesFromBundleMap(this.bundles).filter(bundle => bundle.type === type);
-    return [].concat(projectCSS, pageCSS).map(bundle => bundle.bundlePath);
+    return [].concat(projectCSS, pageCSS).map(bundle => bundle.blazingBundlePath);
   }
 
   getCSSBundles() {

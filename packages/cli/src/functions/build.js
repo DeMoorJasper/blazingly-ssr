@@ -68,7 +68,7 @@ async function build(inputDir, buildOptions = { production: false }) {
   let entryRootDir = getRootDir(entrypoints);
 
   let bundler = new Bundler(entrypoints, {
-    outDir: path.join(outDir, path.relative(inputDir, entryRootDir)),
+    outDir: path.join(outDir, path.relative(inputDir, entryRootDir), '.parcel-dist'),
     cacheDir: cacheDir,
     publicUrl: path.join('/', path.relative(inputDir, entryRootDir)),
     watch: buildOptions.watch,
@@ -88,7 +88,7 @@ async function build(inputDir, buildOptions = { production: false }) {
   entryRootDir = getRootDir(requestHandlers);
 
   let requestHandlerBundler = new Bundler(requestHandlers, {
-    outDir: path.join(outDir, path.relative(inputDir, entryRootDir)),
+    outDir: path.join(outDir, path.relative(inputDir, entryRootDir), '.parcel-dist'),
     cacheDir: cacheDir,
     publicUrl: path.join('/', path.relative(inputDir, entryRootDir)),
     watch: buildOptions.watch,

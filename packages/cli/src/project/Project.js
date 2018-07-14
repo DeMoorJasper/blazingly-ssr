@@ -106,7 +106,7 @@ class Project {
   }
 
   getAllBundlePaths() {
-    return this.getAllBundles().map(bundle => bundle.bundlePath);
+    return this.getAllBundles().map(bundle => bundle.blazingBundlePath);
   }
 
   async getAllRequestHandlers() {
@@ -140,7 +140,7 @@ class Project {
           if (!bundlePaths[bundle.type]) {
             bundlePaths[bundle.type] = [];
           }
-          bundlePaths[bundle.type].push('/' + path.relative(this.options.outDir, bundle.bundlePath));
+          bundlePaths[bundle.type].push('/' + path.relative(this.options.outDir, bundle.blazingBundlePath));
         }
       }
     }
