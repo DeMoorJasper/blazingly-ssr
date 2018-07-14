@@ -35,6 +35,8 @@ class Bundle {
         throw new Error('Cannot read bundle');
       }
     }
+
+    await fs.mkdirp(path.dirname(this.blazingBundlePath));
   }
 
   async postProcess(parcelBundle) {
@@ -46,7 +48,7 @@ class Bundle {
         var ${this.content};
         return parcelRequire(${this.assetId});
       })();`;
-
+      
       await fs.writeFile(this.blazingBundlePath, this.content);
 
       let browserBundle = new Bundle({
