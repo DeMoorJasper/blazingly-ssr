@@ -114,6 +114,10 @@ async function build(inputDir, buildOptions = { production: false }) {
   }
 
   bundler.on('bundled', bundle => {
+    if (!bundle) {
+      return;
+    }
+
     logger.persistSpinner(logger.emoji.success, 'Bundled render-code!', 'green');
     parcelBundle = bundle;
     postProcess();
@@ -124,6 +128,10 @@ async function build(inputDir, buildOptions = { production: false }) {
   });
 
   requestHandlerBundler.on('bundled', bundle => {
+    if (!bundle) {
+      return;
+    }
+
     logger.persistSpinner(logger.emoji.success, 'Request handlers bundled!', 'green');
     requestHandlerBundle = bundle;
     postProcess();
