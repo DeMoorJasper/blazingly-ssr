@@ -1,4 +1,4 @@
-![Blazingly](./.github/logo.png)
+![Blazingly](https://raw.githubusercontent.com/DeMoorJasper/blazingly/master/.github/logo.png)
 
 # Blazingly (Proof Of Concept/Experiment)
 
