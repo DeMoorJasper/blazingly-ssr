@@ -10,10 +10,12 @@ function findAssetBundle(assetName, bundle) {
 function findAssetBundleIteratively(assetName, bundle) {
   let asset = findAssetBundle(assetName, bundle);
 
-  for (let b of bundle.childBundles) {
-    asset = findAssetBundle(assetName, b);
-    if (asset) {
-      return asset;
+  if (!asset) {
+    for (let b of bundle.childBundles) {
+      asset = findAssetBundle(assetName, b);
+      if (asset) {
+        return asset;
+      }
     }
   }
 
