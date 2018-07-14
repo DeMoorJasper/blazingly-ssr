@@ -119,9 +119,12 @@ class Project {
 
   async updateRequestHandlerBundles(parcelBundle) {
     let requestHandlers = await this.getAllRequestHandlers();
+    let promises = [];
     for (let requestHandler of requestHandlers) {
       requestHandler.findBundlePath(parcelBundle);
+      promises.push(requestHandler.postProcess());
     }
+    await Promise.all(promises);
   }
 
   async writeRedirects() {

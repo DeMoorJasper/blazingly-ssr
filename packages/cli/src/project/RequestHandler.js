@@ -1,5 +1,6 @@
 // Node modules
 const fs = require('fs-extra');
+const path = require('path');
 
 // Local requires
 const findAssetBundle = require('../parcel/findAssetBundle');
@@ -12,6 +13,13 @@ class RequestHandler {
     this.assetId = null;
     this._contents = null;
     this.page = page;
+    this.blazingBundlePath = null;
+  }
+
+  async postProcess() {
+    if (this.bundlePath) {
+      await fs.writeFile(this.blazingBundlePath, await this.getContent());
+    }
   }
 
   async getContent() {
@@ -27,7 +35,10 @@ class RequestHandler {
 
   findBundlePath(parcelBundle) {
     this.bundlePath = findAssetBundle(this.entry, parcelBundle);
-    this.assetId = getAssetId(this.entry, parcelBundle);
+    if (this.bundlePath) {
+      this.blazingBundlePath = path.normalize(this.bundlePath.replace('.parcel-dist', ''));
+      this.assetId = getAssetId(this.entry, parcelBundle);
+    }
   }
 }
 
