@@ -6,7 +6,9 @@
     "blazingly": "./src/cli.js"
   },
   "scripts": {
-    "publish-script": "npm publish --access=public"
+    "publish-script": "npm publish --access=public",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "dependencies": {
     "@blazingly/render-sandbox": "^0.1.1",
@@ -20,6 +22,8 @@
     "lodash": "^4.17.10",
     "ora": "^2.1.0",
     "parcel-bundler": "^1.9.4",
-    "terser": "^3.7.6"
-  }
+    "terser": "^3.7.6",
+    "snyk": "^1.89.0"
+  },
+  "snyk": true
 }
