@@ -23,7 +23,7 @@
     "ora": "^2.1.0",
     "parcel-bundler": "^1.9.4",
     "terser": "^3.7.6",
-    "snyk": "^1.89.0"
+    "snyk": "^1.90.0"
   },
   "snyk": true
 }
