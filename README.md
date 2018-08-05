@@ -16,4 +16,5 @@ Besides using Parcel, Blazingly also optimises your web project in other ways us
 ## Sounds awesome! How does it work?
 
 You can view the docs on [Blazingly.io](https://blazingly.io)!
+
 Contributing to the docs is possible on this repo: [Docs repo](https://github.com/DeMoorJasper/blazingly-website).
