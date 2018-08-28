@@ -8,3 +8,5 @@ patch:
         patched: '2018-07-24T21:15:55.205Z'
     - critical > oust > cheerio > lodash:
         patched: '2018-08-01T17:06:58.219Z'
+    - critical > oust > cheerio > lodash:
+        patched: '2018-08-28T17:02:54.687Z'
