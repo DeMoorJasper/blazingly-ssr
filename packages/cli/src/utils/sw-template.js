@@ -1,6 +1,8 @@
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.3.1/workbox-sw.js');
 
-const preCacheUrls = [/* BLAZINGLY INSERT ASSETS */];
+const preCacheUrls = [
+  /* BLAZINGLY INSERT ASSETS */
+];
 
 const matchNonPreCached = ({url}) => {
   return !preCacheUrls.includes(url) && !/.*\.(?:png|jpg|jpeg|svg|gif)/.test(url);
@@ -18,9 +20,9 @@ if (workbox) {
       plugins: [
         new workbox.expiration.Plugin({
           maxEntries: 20,
-          maxAgeSeconds: 7 * 24 * 60 * 60,
+          maxAgeSeconds: 7 * 24 * 60 * 60
         })
-      ],
+      ]
     })
   );
 

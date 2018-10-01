@@ -5,7 +5,7 @@ const build = require('../functions/build');
 const logger = require('../logger');
 const Server = require('@blazingly/server').Server;
 
-function cleanOptions(dir, options) {
+function cleanOptions(dir, options) {
   return {
     inputDir: path.join(process.cwd(), dir),
     outDir: options.outDir,
@@ -17,7 +17,7 @@ function cleanOptions(dir, options) {
 
 async function serve(dir, options = {}) {
   options = cleanOptions(dir, options);
-  
+
   let outDir = path.join(process.cwd(), options.outDir || '.blazingly/serve');
 
   let server;
@@ -32,7 +32,7 @@ async function serve(dir, options = {}) {
 
       if (!server) {
         logger.updateSpinner('Starting server...');
-        server = new Server({ outDir, port: options.port });
+        server = new Server({outDir, port: options.port});
         await server.start();
         logger.persistSpinner(logger.emoji.success, `Server listening on port ${options.port}.`, 'green');
       }

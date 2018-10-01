@@ -9,7 +9,7 @@ const Project = require('../project/Project');
 const logger = require('../logger');
 const getRootDir = require('../utils/getRootDir');
 
-async function postProcessBundles({ project, parcelBundle, requestHandlerBundle }) {
+async function postProcessBundles({project, parcelBundle, requestHandlerBundle}) {
   logger.updateSpinner('Processing bundles...');
 
   try {
@@ -42,7 +42,7 @@ async function postProcessBundles({ project, parcelBundle, requestHandlerBundle 
   logger.persistSpinner(logger.emoji.success, 'Bundles processed!', 'green');
 }
 
-async function build(inputDir, buildOptions = { production: false }) {
+async function build(inputDir, buildOptions = {production: false}) {
   logger.updateSpinner('Bundling render-code...');
 
   // Gather files that need bundling
@@ -82,8 +82,7 @@ async function build(inputDir, buildOptions = { production: false }) {
     autoinstall: false
   });
 
-  let requestHandlers = (await project.getAllRequestHandlers())
-    .map(requestHandler => requestHandler.entry);
+  let requestHandlers = (await project.getAllRequestHandlers()).map(requestHandler => requestHandler.entry);
 
   entryRootDir = getRootDir(requestHandlers);
 
@@ -106,12 +105,12 @@ async function build(inputDir, buildOptions = { production: false }) {
 
   const postProcess = async () => {
     if (requestHandlerBundle && parcelBundle) {
-      await postProcessBundles({ project, parcelBundle, requestHandlerBundle });
+      await postProcessBundles({project, parcelBundle, requestHandlerBundle});
       if (buildOptions.buildTrigger && typeof buildOptions.buildTrigger === 'function') {
         await buildOptions.buildTrigger();
       }
     }
-  }
+  };
 
   bundler.on('bundled', bundle => {
     if (!bundle) {

@@ -9,7 +9,7 @@ const getAssetId = require('../parcel/getAssetId');
 const md5 = require('../utils/md5');
 
 class Bundle {
-  constructor({ type, entry, parent, options = {}, isBrowserBundle = true, content = '' }) {
+  constructor({type, entry, parent, options = {}, isBrowserBundle = true, content = ''}) {
     this.type = type;
     this.entry = entry;
     this.options = options;
@@ -30,7 +30,7 @@ class Bundle {
     this.assetId = getAssetId(this.entry, parcelBundle);
     try {
       this.content = await fs.readFile(this.bundlePath);
-    } catch(e) {
+    } catch (e) {
       if (!this.content) {
         throw new Error('Cannot read bundle');
       }
@@ -48,7 +48,7 @@ class Bundle {
         var ${this.content};
         return parcelRequire(${this.assetId});
       })();`;
-      
+
       await fs.writeFile(this.blazingBundlePath, this.content);
 
       let browserBundle = new Bundle({
@@ -66,10 +66,7 @@ class Bundle {
     this.contentHash = md5(this.content);
 
     if (this.isBrowserBundle) {
-      let hashedBundlePath = path.join(
-        path.dirname(this.blazingBundlePath),
-        `${this.contentHash}${this.extension}`
-      );
+      let hashedBundlePath = path.join(path.dirname(this.blazingBundlePath), `${this.contentHash}${this.extension}`);
       await fs.writeFile(hashedBundlePath, this.content);
       this.blazingBundlePath = hashedBundlePath;
     }

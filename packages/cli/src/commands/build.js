@@ -4,7 +4,7 @@ const path = require('path');
 const build = require('../functions/build');
 const logger = require('../logger');
 
-function cleanOptions(dir, options) {
+function cleanOptions(dir, options) {
   return {
     inputDir: path.join(process.cwd(), dir),
     outDir: options.outDir,
@@ -15,7 +15,7 @@ function cleanOptions(dir, options) {
 
 async function deploy(dir, options = {}) {
   options = cleanOptions(dir, options);
-  
+
   let outDir = path.join(process.cwd(), options.outDir || '.blazingly/dist');
   let bundledPath = await build(options.inputDir, {
     production: true,

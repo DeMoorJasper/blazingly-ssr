@@ -6,10 +6,10 @@ exports.post = async (...args) => {
       if (err) {
         return reject(err);
       }
-      return resolve({ httpResponse, body });
+      return resolve({httpResponse, body});
     });
   });
-}
+};
 
 exports.put = async (...args) => {
   return new Promise((resolve, reject) => {
@@ -17,10 +17,10 @@ exports.put = async (...args) => {
       if (err) {
         return reject(err);
       }
-      return resolve({ httpResponse, body });
+      return resolve({httpResponse, body});
     });
   });
-}
+};
 
 exports.request = async (...args) => {
   return new Promise((resolve, reject) => {
@@ -28,7 +28,7 @@ exports.request = async (...args) => {
       if (err) {
         return reject(err);
       }
-      return resolve({ httpResponse, body });
+      return resolve({httpResponse, body});
     });
   });
-}
+};

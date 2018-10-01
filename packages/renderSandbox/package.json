@@ -3,12 +3,16 @@
   "version": "0.1.1",
   "main": "./src/RenderSandbox.js",
   "license": "MIT",
+  "scripts": {
+    "publish-script": "npm publish --access=public",
+    "lint": "eslint ."
+  },
   "dependencies": {
     "jsdom": "^11.11.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1"
   },
-  "scripts": {
-    "publish-script": "npm publish --access=public"
+  "devDependencies": {
+    "eslint": "^5.6.1"
   }
 }

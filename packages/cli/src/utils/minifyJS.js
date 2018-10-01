@@ -2,7 +2,7 @@ const terser = require('terser');
 
 const OPTIONS = {
   mangle: {
-    toplevel: true,
+    toplevel: true
   },
   compress: {
     drop_console: true,

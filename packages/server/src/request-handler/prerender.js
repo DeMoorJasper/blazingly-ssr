@@ -27,7 +27,7 @@ async function preRender(req, res, parsedUrl, options) {
   if (!rootBundlePaths) {
     try {
       rootBundlePaths = JSON.parse(await fs.readFile(path.join(options.outDir, 'bundlePaths.json'), 'utf-8'));
-    } catch(e) {
+    } catch (e) {
       rootBundlePaths = {};
     }
   }
@@ -35,7 +35,7 @@ async function preRender(req, res, parsedUrl, options) {
   if (!pageBundlePaths[pageName]) {
     try {
       pageBundlePaths[pageName] = JSON.parse(await fs.readFile(path.join(pageFolder, 'bundlePaths.json'), 'utf-8'));
-    } catch(e) {
+    } catch (e) {
       pageBundlePaths[pageName] = {};
     }
   }
@@ -48,13 +48,13 @@ async function preRender(req, res, parsedUrl, options) {
   }
 
   pageData.page = pageName;
-  
+
   try {
     pageData.criticalCSS = await fs.readFile(path.join(pageFolder, 'critical.css'), 'utf-8');
   } catch (e) {
     pageData.criticalCSS = '';
   }
-  
+
   pageData.criticalScripts = [];
 
   pageData.nonCriticalScripts = [];
@@ -77,12 +77,12 @@ async function preRender(req, res, parsedUrl, options) {
   try {
     const requestHandler = require(path.join(pageFolder, 'handleRequest.js'));
     requestHandlerProps = await requestHandler(req);
-  } catch(e) {
+  } catch (e) {
     // Do nothing for now
     // in the future only filter out FS errors...
   }
-  
-  pageData.properties = Object.assign(requestHandlerProps || {}, pageData.properties || {});
+
+  pageData.properties = Object.assign(requestHandlerProps || {}, pageData.properties || {});
 
   res.status(200);
   res.set('Content-Type', 'text/html; charset=utf-8');
@@ -100,7 +100,7 @@ async function preRender(req, res, parsedUrl, options) {
       resolve();
     });
 
-    stream.on('error', e => {
+    stream.on('error', () => {
       // Cleanly close stream
       stream.unpipe(res);
       stream.destroy();
@@ -120,11 +120,11 @@ function writeHeader(res, pageData) {
   let metaData = '';
   if (pageData.header && Array.isArray(pageData.header.meta)) {
     for (let metaItem of pageData.header.meta) {
-      metaData += "<meta ";
+      metaData += '<meta ';
       for (let key in metaItem) {
         metaData += `${key}="${metaItem[key]}" `;
       }
-      metaData += ">\n";
+      metaData += '>\n';
     }
   }
 
@@ -135,16 +135,17 @@ function writeHeader(res, pageData) {
 
   let deferredStyles = '<noscript>';
   for (let style of pageData.nonCriticalStyles) {
-    deferredStyles += `<link rel="stylesheet" type="text/css" href="${style}" />`
+    deferredStyles += `<link rel="stylesheet" type="text/css" href="${style}" />`;
   }
   deferredStyles += '</noscript>';
 
   let propertiesJSONString;
   try {
     JSON.stringify(pageData.properties);
-  } catch(e) {
-    console.error(`Could not stringify page properties`);
-    console.error(e);
+  } catch (e) {
+    // do nothing...
+    // console.error(`Could not stringify page properties`);
+    // console.error(e);
   }
 
   res.write(`

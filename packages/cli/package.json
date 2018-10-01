@@ -2,13 +2,15 @@
   "name": "@blazingly/cli",
   "version": "0.2.1",
   "license": "MIT",
+  "snyk": true,
   "bin": {
     "blazingly": "./src/cli.js"
   },
   "scripts": {
     "publish-script": "npm publish --access=public",
     "snyk-protect": "snyk protect",
-    "prepare": "npm run snyk-protect"
+    "prepare": "npm run snyk-protect",
+    "lint": "eslint ."
   },
   "dependencies": {
     "@blazingly/render-sandbox": "^0.1.1",
@@ -25,5 +27,7 @@
     "terser": "^3.7.6",
     "snyk": "^1.94.0"
   },
-  "snyk": true
+  "devDependencies": {
+    "eslint": "^5.6.1"
+  }
 }

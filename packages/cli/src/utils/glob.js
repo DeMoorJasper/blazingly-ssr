@@ -1,4 +1,4 @@
-const glob = require("glob");
+const glob = require('glob');
 
 module.exports = async (...args) => {
   return new Promise((resolve, reject) => {
@@ -8,5 +8,5 @@ module.exports = async (...args) => {
       }
       return resolve(files);
     });
-  })
-}
+  });
+};
