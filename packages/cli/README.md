@@ -64,6 +64,7 @@ Create a scripts section in your package.json, otherwise it's probably not gonna
 Well Blazingly has a very strict naming and folder structure convention, besides that you can pretty much do whatever you want.
 
 Project structure:
+
 ```
 /root
   /.root - This is the root of the project '/' route
@@ -81,16 +82,19 @@ Project structure:
 ```
 
 Starting the application:
+
 ```bash
 blazingly serve <folder containing all the pages {in the above case ./root}>
 ```
 
 Building for production
+
 ```bash
 blazingly build <folder containing all the pages {in the above case ./root}>
 ```
 
 Starting the production server (run blazingly build first!)
+
 ```bash
 blazingly prod-serve <the output folder of the build command>
 ```

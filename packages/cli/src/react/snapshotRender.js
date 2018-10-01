@@ -5,7 +5,7 @@ const path = require('path');
 const RenderSandbox = require('@blazingly/render-sandbox');
 
 // Used for critical css selection and snapshot rendering for dev server
-async function snapshot({ page, cssBundles, jsBundles, isProduction }) {
+async function snapshot({page, cssBundles, jsBundles}) {
   let pageData = await page.getPageData();
   jsBundles = jsBundles || page.getJSBundles();
   cssBundles = cssBundles || page.getCSSBundles();
@@ -13,11 +13,11 @@ async function snapshot({ page, cssBundles, jsBundles, isProduction }) {
   let metaData = '';
   if (pageData.header && pageData.header.meta && Array.isArray(pageData.header.meta)) {
     for (let metaItem of pageData.header.meta) {
-      metaData += "<meta ";
+      metaData += '<meta ';
       for (let key in metaItem) {
         metaData += `${key}="${metaItem[key]}" `;
       }
-      metaData += ">";
+      metaData += '>';
     }
   }
 
@@ -53,7 +53,10 @@ async function snapshot({ page, cssBundles, jsBundles, isProduction }) {
       <script>
         if ('serviceWorker' in navigator) {
           window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/${path.relative(page.options.outDir, page.project.serviceWorker.path)}').then(() => {
+            navigator.serviceWorker.register('/${path.relative(
+              page.options.outDir,
+              page.project.serviceWorker.path
+            )}').then(() => {
               console.log('Service worker registered');
             }).catch(e => {
               console.log('Could not register the service worker');

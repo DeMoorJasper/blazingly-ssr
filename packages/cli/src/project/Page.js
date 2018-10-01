@@ -11,7 +11,7 @@ const snapshot = require('../react/snapshotRender');
 const RequestHandler = require('./RequestHandler');
 
 class Page {
-  constructor({ name, pageRoot, project, options = {} }) {
+  constructor({name, pageRoot, project, options = {}}) {
     this.name = name;
     this.options = options;
     this.rootDir = pageRoot;
@@ -34,7 +34,7 @@ class Page {
     if (!this._pageData) {
       if (await fs.exists(this.pageDataPath)) {
         this._pageData = JSON.parse((await fs.readFile(this.pageDataPath)).toString());
-      } else  {
+      } else {
         this._pageData = {};
       }
       this._pageData = _.merge(this._pageData, await this.project.getSiteData());
@@ -50,13 +50,16 @@ class Page {
         nodir: true
       });
       if (jsFiles.length > 0) {
-        this.addBundle('js', new Bundle({
-          type: 'js', 
-          entry: jsFiles[0],
-          parent: this,
-          options: this.options,
-          isBrowserBundle: false
-        }));
+        this.addBundle(
+          'js',
+          new Bundle({
+            type: 'js',
+            entry: jsFiles[0],
+            parent: this,
+            options: this.options,
+            isBrowserBundle: false
+          })
+        );
       }
     }
 
@@ -68,13 +71,16 @@ class Page {
       });
       if (cssFiles.length > 0) {
         for (let cssFile of cssFiles) {
-          this.addBundle('css', new Bundle({
-            type: 'css', 
-            entry: cssFile,
-            parent: this,
-            options: this.options,
-            isBrowserBundle: true
-          }));
+          this.addBundle(
+            'css',
+            new Bundle({
+              type: 'css',
+              entry: cssFile,
+              parent: this,
+              options: this.options,
+              isBrowserBundle: true
+            })
+          );
         }
       }
     }
@@ -86,7 +92,7 @@ class Page {
       let requestHandlerPossibilities = await glob(path.join(this.rootDir, 'handleRequest.*'), {
         nodir: true
       });
-  
+
       if (requestHandlerPossibilities.length > 0) {
         this._requestHandler = new RequestHandler(requestHandlerPossibilities[0], this);
       }
@@ -97,7 +103,7 @@ class Page {
   async _postProcessBundles(parcelBundle) {
     let promises = [];
     for (let bundleSet of this.bundles.values()) {
-      for (let bundle of bundleSet)  {
+      for (let bundle of bundleSet) {
         promises.push(bundle.postProcess(parcelBundle));
       }
     }
@@ -107,7 +113,7 @@ class Page {
   async writeBundlePathsJSON() {
     let bundlePaths = {};
     for (let bundleSet of this.bundles.values()) {
-      for (let bundle of bundleSet)  {
+      for (let bundle of bundleSet) {
         if (bundle.isBrowserBundle) {
           if (!bundlePaths[bundle.type]) {
             bundlePaths[bundle.type] = [];
@@ -116,11 +122,8 @@ class Page {
         }
       }
     }
-    
-    await fs.writeFile(
-      path.join(this.options.outDir, this.name, 'bundlePaths.json'),
-      JSON.stringify(bundlePaths)
-    );
+
+    await fs.writeFile(path.join(this.options.outDir, this.name, 'bundlePaths.json'), JSON.stringify(bundlePaths));
   }
 
   async postProcess(parcelBundle) {
@@ -138,7 +141,7 @@ class Page {
   _getBundlesFromBundleMap(bundleMap) {
     let bundles = [];
     for (let bundleSet of bundleMap.values()) {
-      for (let bundle of bundleSet) {
+      for (let bundle of bundleSet) {
         bundles.push(bundle);
       }
     }
@@ -160,9 +163,7 @@ class Page {
   }
 
   getRenderScript() {
-    return this._getBundlesFromBundleMap(this.bundles).find(bundle => 
-      bundle.type === 'js' && !bundle.isBrowserBundle
-    );
+    return this._getBundlesFromBundleMap(this.bundles).find(bundle => bundle.type === 'js' && !bundle.isBrowserBundle);
   }
 
   async snapshot(isProduction = true) {
@@ -186,7 +187,7 @@ class Page {
       content = content.replace('/* BLAZINGLY INLINE CRITICAL CSS */', criticalCss);
       await fs.writeFile(path.join(this.outDir, 'critical.css'), criticalCss);
     }
-    
+
     await fs.writeFile(path.join(this.outDir, 'index.html'), content);
   }
 }

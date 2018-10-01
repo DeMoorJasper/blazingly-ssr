@@ -7,7 +7,7 @@ const createServiceWorker = require('../utils/createServiceWorker');
 const md5 = require('../utils/md5');
 
 class ServiceWorker {
-  constructor({ project, options }) {
+  constructor({project, options}) {
     this.project = project;
     this.options = options;
     this.content = '';

@@ -1,9 +1,20 @@
 {
-	"scripts": {
-		"updated": "lerna updated",
-		"bootstrap": "lerna bootstrap"
-	},
-	"devDependencies": {
-		"lerna": "^2.11.0"
-	}
+  "scripts": {
+    "updated": "lerna updated",
+    "bootstrap": "lerna bootstrap",
+    "lint": "lerna run lint",
+    "format": "prettier --write \"**/*.{js,json,md}\""
+  },
+  "lint-staged": {
+    "*.{js,json,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "devDependencies": {
+    "husky": "^1.1.0",
+    "lerna": "^2.11.0",
+    "lint-staged": "^7.3.0",
+    "prettier": "^1.14.3"
+  }
 }

@@ -27,7 +27,7 @@ class Project {
     if (!this._siteData) {
       if (await fs.exists(this.siteDataPath)) {
         this._siteData = JSON.parse((await fs.readFile(this.siteDataPath)).toString());
-      } else {
+      } else {
         this._siteData = {};
       }
     }
@@ -43,9 +43,9 @@ class Project {
         let stat = await fs.stat(absoluteFolderPath);
         if (stat.isDirectory()) {
           let page = new Page({
-            name: folder, 
-            pageRoot: path.join(this.rootDir, folder), 
-            project: this, 
+            name: folder,
+            pageRoot: path.join(this.rootDir, folder),
+            project: this,
             options: this.options
           });
           this.pages.set(folder, page);
@@ -70,13 +70,16 @@ class Project {
     });
     if (globalCSSFiles.length > 0) {
       for (let cssFile of globalCSSFiles) {
-        this.addBundle('css', new Bundle({
-          type: 'css', 
-          entry: cssFile,
-          parent: this,
-          options: this.options,
-          isBrowserBundle: true
-        }));
+        this.addBundle(
+          'css',
+          new Bundle({
+            type: 'css',
+            entry: cssFile,
+            parent: this,
+            options: this.options,
+            isBrowserBundle: true
+          })
+        );
       }
     }
   }
@@ -84,7 +87,7 @@ class Project {
   _getBundlesFromBundleMap(bundleMap) {
     let bundles = [];
     for (let bundleSet of bundleMap.values()) {
-      for (let bundle of bundleSet) {
+      for (let bundle of bundleSet) {
         bundles.push(bundle);
       }
     }
@@ -93,7 +96,7 @@ class Project {
 
   getAllBundles() {
     let bundles = [].concat(this._getBundlesFromBundleMap(this.bundles));
-    
+
     for (let page of this.pages.values()) {
       bundles = bundles.concat(this._getBundlesFromBundleMap(page.bundles));
     }
@@ -138,7 +141,7 @@ class Project {
   async writeBundlePathsJSON() {
     let bundlePaths = {};
     for (let bundleSet of this.bundles.values()) {
-      for (let bundle of bundleSet)  {
+      for (let bundle of bundleSet) {
         if (bundle.isBrowserBundle) {
           if (!bundlePaths[bundle.type]) {
             bundlePaths[bundle.type] = [];
@@ -147,21 +150,17 @@ class Project {
         }
       }
     }
-    
-    await fs.writeFile(
-      path.join(this.options.outDir, 'bundlePaths.json'),
-      JSON.stringify(bundlePaths)
-    );
+
+    await fs.writeFile(path.join(this.options.outDir, 'bundlePaths.json'), JSON.stringify(bundlePaths));
   }
 
   async postProcessParcelBundle(parcelBundle) {
     let promises = [];
 
-    promises.push(fs.writeFile(
-      path.join(this.options.outDir, 'siteData.json'), 
-      JSON.stringify(await this.getSiteData())
-    ));
-    
+    promises.push(
+      fs.writeFile(path.join(this.options.outDir, 'siteData.json'), JSON.stringify(await this.getSiteData()))
+    );
+
     for (let page of this.pages.values()) {
       promises.push(page.postProcess(parcelBundle));
     }
