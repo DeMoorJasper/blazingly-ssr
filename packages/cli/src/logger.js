@@ -2,6 +2,7 @@ const ora = require('ora');
 const chalk = require('chalk');
 const emoji = require('./utils/emoji');
 
+/* eslint no-console: 0 */
 let spinner;
 
 function updateSpinner(text, color) {

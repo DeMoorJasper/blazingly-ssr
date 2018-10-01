@@ -1,3 +1,6 @@
+/* global importScripts workbox:true */
+/* eslint-env browser */
+
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.3.1/workbox-sw.js');
 
 const preCacheUrls = [
@@ -33,6 +36,4 @@ if (workbox) {
       cacheName: 'offline-cache'
     })
   );
-} else {
-  console.log("Couldn't load workerbox.");
 }

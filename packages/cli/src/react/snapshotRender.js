@@ -5,7 +5,7 @@ const path = require('path');
 const RenderSandbox = require('@blazingly/render-sandbox');
 
 // Used for critical css selection and snapshot rendering for dev server
-async function snapshot({page, cssBundles, jsBundles, isProduction}) {
+async function snapshot({page, cssBundles, jsBundles}) {
   let pageData = await page.getPageData();
   jsBundles = jsBundles || page.getJSBundles();
   cssBundles = cssBundles || page.getCSSBundles();
