@@ -1,5 +1,7 @@
 ![Blazingly](./.github/logo.png)
 
+⚠️This project will be rewritten into a production ready tool once Parcel 2 lands a proper Beta. Please don't use the current version in any kind of production environment.
+
 # Blazingly (Proof Of Concept/Experiment)
 
 Blazingly™ is a SSR cli tool using parcel in the background for creating web projects that load insanely fast without having to worry about anything as a developer, thanks to the power of parcel and the many tools already included within this CLI.
