@@ -24,7 +24,7 @@
     "lodash": "^4.17.10",
     "ora": "^2.1.0",
     "parcel-bundler": "^1.9.4",
-    "terser": "^3.7.6",
+    "terser": "^4.0.2",
     "snyk": "^1.94.0"
   },
   "devDependencies": {
