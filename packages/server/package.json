@@ -17,7 +17,7 @@
     "snyk": "^1.189.0"
   },
   "devDependencies": {
-    "eslint": "^5.6.1"
+    "eslint": "^6.3.0"
   },
   "snyk": true
 }
