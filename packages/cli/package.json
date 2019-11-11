@@ -15,7 +15,7 @@
   "dependencies": {
     "@blazingly/render-sandbox": "^0.1.1",
     "@blazingly/server": "^0.1.1",
-    "chalk": "^2.4.1",
+    "chalk": "^3.0.0",
     "commander": "^3.0.1",
     "critical": "^1.3.2",
     "fs-extra": "^6.0.1",
