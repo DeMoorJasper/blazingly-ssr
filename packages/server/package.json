@@ -12,7 +12,7 @@
   "dependencies": {
     "@blazingly/render-sandbox": "^0.1.1",
     "express": "^4.16.3",
-    "fs-extra": "^6.0.1",
+    "fs-extra": "^9.0.0",
     "mime": "^2.3.1",
     "snyk": "^1.189.0"
   },
