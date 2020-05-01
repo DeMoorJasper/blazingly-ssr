@@ -5,14 +5,18 @@
   "license": "MIT",
   "scripts": {
     "publish-script": "npm publish --access=public",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "dependencies": {
     "jsdom": "^15.1.0",
     "react": "^16.4.1",
-    "react-dom": "^16.4.1"
+    "react-dom": "^16.4.1",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "eslint": "^6.3.0"
-  }
+  },
+  "snyk": true
 }
