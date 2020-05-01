@@ -1,5 +1,5 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.12.0
+version: v1.14.1
 ignore: {}
 # patches apply the minimum changes required to fix a vulnerability
 patch:
@@ -10,3 +10,38 @@ patch:
         patched: '2018-08-01T17:06:58.219Z'
     - critical > oust > cheerio > lodash:
         patched: '2018-08-28T17:02:54.687Z'
+  SNYK-JS-LODASH-567746:
+    - lodash:
+        patched: '2020-05-01T07:50:06.967Z'
+    - critical > lodash:
+        patched: '2020-05-01T07:50:06.967Z'
+    - inquirer > lodash:
+        patched: '2020-05-01T07:50:06.967Z'
+    - critical > group-args > lodash:
+        patched: '2020-05-01T07:50:06.967Z'
+    - parcel-bundler > @babel/core > lodash:
+        patched: '2020-05-01T07:50:06.967Z'
+    - parcel-bundler > @babel/preset-env > @babel/plugin-transform-block-scoping > lodash:
+        patched: '2020-05-01T07:50:06.967Z'
+    - parcel-bundler > babylon-walk > babel-types > lodash:
+        patched: '2020-05-01T07:50:06.967Z'
+    - parcel-bundler > htmlnano > uncss > lodash:
+        patched: '2020-05-01T07:50:06.967Z'
+    - '@blazingly/render-sandbox > jsdom > request-promise-native > request-promise-core > lodash':
+        patched: '2020-05-01T07:50:06.967Z'
+    - parcel-bundler > @babel/preset-env > @babel/plugin-transform-classes > @babel/helper-define-map > lodash:
+        patched: '2020-05-01T07:50:06.967Z'
+    - '@blazingly/server > @blazingly/render-sandbox > jsdom > request-promise-native > request-promise-core > lodash':
+        patched: '2020-05-01T07:50:06.967Z'
+    - parcel-bundler > @babel/preset-env > @babel/plugin-transform-unicode-regex > @babel/helper-create-regexp-features-plugin > @babel/helper-regex > lodash:
+        patched: '2020-05-01T07:50:06.967Z'
+    - parcel-bundler > htmlnano > uncss > jsdom > request-promise-native > request-promise-core > lodash:
+        patched: '2020-05-01T07:50:06.967Z'
+    - parcel-bundler > @babel/preset-env > @babel/preset-modules > @babel/plugin-transform-dotall-regex > @babel/helper-create-regexp-features-plugin > @babel/helper-regex > lodash:
+        patched: '2020-05-01T07:50:06.967Z'
+    - parcel-bundler > @babel/preset-env > @babel/plugin-transform-exponentiation-operator > @babel/helper-builder-binary-assignment-operator-visitor > @babel/helper-explode-assignable-expression > @babel/traverse > @babel/generator > lodash:
+        patched: '2020-05-01T07:50:06.967Z'
+    - parcel-bundler > @babel/preset-env > @babel/plugin-transform-exponentiation-operator > @babel/helper-builder-binary-assignment-operator-visitor > @babel/helper-explode-assignable-expression > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash:
+        patched: '2020-05-01T07:50:06.967Z'
+    - parcel-bundler > @babel/preset-env > @babel/plugin-transform-exponentiation-operator > @babel/helper-builder-binary-assignment-operator-visitor > @babel/helper-explode-assignable-expression > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash:
+        patched: '2020-05-01T07:50:06.967Z'
